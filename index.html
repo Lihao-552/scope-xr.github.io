@@ -1,0 +1,236 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCOPE-XR: Seeing the Channel</title>
+<meta name="description" content="SCOPE-XR: Seeing the Channel — Optimizing Perception-aware Environments for XR. NSF VINES Track 2 project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg-alt:#f5f7fa; --text:#1a1f2b; --muted:#5b6475;
+    --accent:#ba0c2f; /* UGA red */ --accent-2:#2f5d8a; --border:#e3e7ee;
+    --hero-from:#121826; --hero-to:#2a1f3d;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0f131b; --bg-alt:#161b25; --text:#e7eaf0; --muted:#9aa3b5;
+      --accent:#ff5a6e; --accent-2:#7fb0e0; --border:#262d3a; }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--text);background:var(--bg);line-height:1.65}
+  a{color:var(--accent-2);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .logo{font-weight:700;letter-spacing:.02em;color:var(--text)} .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.93rem}
+  nav ul a{color:var(--muted)} nav ul a:hover{color:var(--text);text-decoration:none}
+  @media (max-width:720px){nav ul{display:none}}
+  header.hero{background:linear-gradient(135deg,var(--hero-from),var(--hero-to));color:#fff;padding:96px 0 84px}
+  .tag{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#ffb3bd;margin-bottom:14px}
+  h1{font-size:clamp(1.9rem,4.2vw,2.9rem);line-height:1.12;margin:0 0 16px}
+  .hero p.sub{font-size:1.2rem;max-width:720px;color:#d6dbe6;margin:0 0 28px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:10px 18px;border-radius:8px;font-weight:600;font-size:.95rem}
+  .btn.primary{background:var(--accent);color:#fff} .btn.ghost{border:1px solid #ffffff55;color:#fff}
+  .btn:hover{text-decoration:none;opacity:.9}
+  section{padding:72px 0} section.alt{background:var(--bg-alt)}
+  h2{font-size:1.8rem;margin:0 0 8px} .lead{color:var(--muted);max-width:760px;margin:0 0 36px}
+  .grid{display:grid;gap:20px} .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:24px}
+  section.alt .card{background:var(--bg)}
+  .card .num{font-size:.8rem;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .card h3{margin:6px 0 8px;font-size:1.12rem}
+  .card p{margin:0;color:var(--muted);font-size:.96rem}
+  .person{text-align:center}
+  .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 12px;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;color:var(--muted)}
+  .person .role{font-size:.85rem;color:var(--accent);font-weight:600}
+  .person .aff{font-size:.88rem;color:var(--muted)}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:8px}
+  .fact{border-left:3px solid var(--accent);padding:4px 0 4px 14px}
+  .fact b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+  ul.news{list-style:none;padding:0;margin:0}
+  ul.news li{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid var(--border)}
+  ul.news .d{flex:0 0 92px;color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+  .inst ul{list-style:none;padding:0;margin:12px 0 0} .inst li{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid var(--border)} .inst li:last-child{border-bottom:0} .inst em{color:var(--muted);font-style:normal;font-size:.88rem}
+  .roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+  .ms{border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:8px;padding:12px;font-size:.92rem;background:var(--bg-alt)}
+  .ms b{display:block;font-size:.8rem;color:var(--accent)} .ms span{display:block;color:var(--muted);font-size:.8rem;margin-top:4px}
+  .tl{list-style:none;margin:0;padding:0 0 0 28px;position:relative}
+  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--border)}
+  .tl li{position:relative;padding:0 0 26px}
+  .tl li::before{content:"";position:absolute;left:-27px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--border)}
+  .tl li.done::before{background:var(--accent);border-color:var(--accent)}
+  .tl li.now::before{background:var(--bg);border-color:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .tl .when{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums} .tl .when b{color:var(--accent)}
+  .tl h3{margin:2px 0 2px;font-size:1.05rem} .tl p{margin:0;color:var(--muted);font-size:.94rem}
+  .tl li:not(.done):not(.now) h3{color:var(--muted)}
+  section{scroll-margin-top:58px}
+  .codebar{display:flex;gap:16px;align-items:center;padding:20px 22px;margin:0 0 20px;border-radius:12px;background:var(--text);color:var(--bg)}
+  .codebar:hover{text-decoration:none;opacity:.92} .codebar b{display:block;font-size:1.05rem;margin-bottom:2px} .codebar span{font-size:.94rem}
+  .abs{max-width:820px} .abs h3{margin:0 0 6px;font-size:1.05rem} .abs p{margin:0 0 16px}
+  .abs details{border-top:1px solid var(--border);padding:12px 0} .abs details p{margin:10px 0 0;color:var(--muted)}
+  .abs summary{cursor:pointer;font-weight:600}
+  .ph{position:relative;flex:0 0 52px;width:52px;height:52px;border-radius:50%;overflow:hidden;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.9rem;color:var(--muted)}
+  .ph::before{content:attr(data-i)} .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .herotop{display:flex;align-items:center;gap:14px;margin-bottom:14px} .herotop .tag{margin:0}
+  .nsflogo{width:56px;height:56px}
+  .inst li a{color:var(--text)} .inst li a:hover{color:var(--accent-2)}
+  section.logos{padding:26px 0;background:#fff;border-bottom:1px solid #e3e7ee}
+  .logorow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:22px 34px}
+  .logorow img{height:44px;width:auto;display:block} .logorow .l-nsf{height:64px} .logorow .l-uw{height:58px} .logorow .l-eri{height:52px}
+  @media (max-width:720px){.logorow{justify-content:center}.logorow img{height:34px}.logorow .l-nsf{height:50px}.logorow .l-uw{height:46px}.logorow .l-eri{height:40px}}
+  .note{color:var(--muted);font-size:.92rem;margin-top:18px}
+  footer{padding:40px 0;border-top:1px solid var(--border);font-size:.88rem;color:var(--muted)}
+  .ack{max-width:820px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo">SCOPE<span>-XR</span></a>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#outputs">Outputs</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="herotop"><img src="assets/logos/nsf.png" alt="U.S. National Science Foundation" class="nsflogo"><div class="tag">NSF VINES · Track 2 · Award #2554332</div></div>
+    <h1>SCOPE-XR: Seeing the Channel: Optimizing Perception-aware Environments for XR</h1>
+    <p class="sub">We align what devices see with what the radio channel does, so next-generation networks can anticipate XR users instead of reacting to them.</p>
+    <div class="btns">
+      <a class="btn primary" href="#overview">Learn more</a>
+      <a class="btn ghost" href="https://github.com/SCOPE-XR">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section class="logos" aria-label="Sponsor and partners">
+  <div class="wrap">
+    <div class="logorow">
+      <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2554332" title="U.S. National Science Foundation"><img src="assets/logos/nsf.png" alt="U.S. National Science Foundation" class="l-nsf"></a>
+      <a href="https://www.uga.edu" title="University of Georgia"><img src="assets/logos/uga.png" alt="University of Georgia"></a>
+      <a href="https://www.utexas.edu" title="The University of Texas at Austin"><img src="assets/logos/ut-austin.svg" alt="The University of Texas at Austin"></a>
+      <a href="https://www.vt.edu" title="Virginia Tech"><img src="assets/logos/virginia-tech.svg" alt="Virginia Tech"></a>
+      <a href="https://www.wisc.edu" title="University of Wisconsin–Madison"><img src="assets/logos/uw-madison.png" alt="University of Wisconsin–Madison" class="l-uw"></a>
+      <a href="https://www.ericsson.com" title="Ericsson"><img src="assets/logos/ericsson.svg" alt="Ericsson" class="l-eri"></a>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="wrap">
+    <h2>Overview</h2>
+    <p class="lead">XR headsets need high throughput, very low latency, and reliable links. In real rooms, people move, turn their heads, and block signals constantly. SCOPE-XR builds an AI-native, integrated sensing-and-communication framework. It fuses on-device perception (pose, gaze, scene geometry) with radio measurements to predict channel conditions and adapt the network ahead of time.</p>
+  </div>
+</section>
+
+<section id="abstract" class="alt">
+  <div class="wrap">
+    <h2>NSF Award Abstract</h2>
+    <div class="abs">
+      <p>Extended reality (XR), including augmented, virtual, and mixed reality, will require wireless networks that can respond reliably to user motion, changing environments, and strict delay constraints. Existing Wi-Fi and 5G systems remain largely reactive and are not designed to support immersive, multi-user experiences that depend on stable spatial alignment and low motion-to-photon latency. This project will advance a new class of perception-aware wireless systems that will help future networks better support education, healthcare, manufacturing, and public-safety training. By enabling more robust and adaptive XR connectivity, the research will strengthen U.S. leadership in next-generation (NextG) wireless and immersive technologies, broaden access to advanced digital experiences, and train students at the intersection of wireless networking, machine learning, and XR systems. The project will also produce open software and evaluation assets that will support research, workforce development, and future technology translation.</p>
+      <p>The project will develop an Artificial Intelligence (AI)-native, integrated sensing and communication (ISAC) framework for next-generation XR networking. The central technical idea is a Radio Radiance Field, a vision-aligned channel abstraction that will combine radio measurements with on-device perception to infer predictive channel priors in dynamic environments. These priors will drive software-defined network control functions for beamforming, scheduling, handover, and edge-assisted adaptation through Open Radio Access Network (O-RAN)-compliant xApps and rApps. The project will also couple XR pose, gaze, and rendering priorities with wireless control to enable closed-loop coordination between the sensing, communication, and application layers. The research team will validate the system in representative collaborative learning and industrial XR scenarios and will quantify communication gains together with latency and compute overhead. Expected outcomes will include deployable O-RAN software modules, benchmarked multimodal datasets and evaluation methods, and design principles for applying AI-native and ISAC-enabled control to XR and other perception-driven NextG wireless systems.</p>
+      <p class="note">Source: <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2554332">NSF Award #2554332</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <h2>Timeline</h2>
+    <p class="lead">SCOPE-XR is underway. Milestones will be added as the project progresses.</p>
+    <ol class="tl">
+      <li class="done"><span class="when">Sep 1, 2026</span><h3>Project start</h3><p>NSF VINES Track 2 award #2554332 begins.</p></li>
+      <li class="done"><span class="when">Sep 4, 2026</span><h3>Kickoff meeting</h3><p>All five partner organizations meet; communication plan and reporting rhythm set.</p></li>
+      <li class="now"><span class="when">Fall 2026 · <b>Now</b></span><h3>Launch &amp; planning</h3><p>Project website, cross-site technical planning, and shared data infrastructure.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="team" class="alt">
+  <div class="wrap">
+    <h2>Team</h2>
+    <p class="lead">Five organizations spanning NextG wireless, XR systems, and large-scale testbeds.</p>
+    <div class="grid g3 sites">
+      <div class="card inst">
+        <div class="num">UNIVERSITY OF GEORGIA · LEAD</div>
+        <ul>
+          <li><span class="ph" data-i="HS"><img src="assets/people/haijian-sun.jpg" alt="Haijian Sun" loading="lazy" onerror="this.remove()"></span><span><a href="https://engineering.uga.edu/team_member/haijian-sun/" target="_blank" rel="noopener">Haijian Sun</a> <em>(PI)</em></span></li>
+          <li><span class="ph" data-i="ZA"><img src="assets/people/zhenlin-an.jpg" alt="Zhenlin An" loading="lazy" onerror="this.remove()"></span><span><a href="https://csci.franklin.uga.edu/directory/people/zhenlin" target="_blank" rel="noopener">Zhenlin An</a> <em>(Co-PI)</em></span></li>
+          <li><span class="ph" data-i="KJ"><img src="assets/people/kyle-johnsen.jpg" alt="Kyle Johnsen" loading="lazy" onerror="this.remove()"></span><span><a href="https://engineering.uga.edu/team_member/kyle-johnsen/" target="_blank" rel="noopener">Kyle Johnsen</a> <em>(Co-PI)</em></span></li>
+          <li><span class="ph" data-i="MK"><img src="assets/people/mehmet-kurum.jpg" alt="Mehmet Kurum" loading="lazy" onerror="this.remove()"></span><span><a href="https://engineering.uga.edu/team_member/mehmet-kurum" target="_blank" rel="noopener">Mehmet Kurum</a> <em>(Co-PI)</em></span></li>
+          <li><span class="ph" data-i="WS"><img src="assets/people/wenzhan-song.jpg" alt="WenZhan Song" loading="lazy" onerror="this.remove()"></span><span><a href="https://computing.uga.edu/directory/people/wenzhan-song" target="_blank" rel="noopener">WenZhan Song</a> <em>(Co-PI)</em></span></li>
+        </ul>
+      </div>
+      <div class="card inst">
+        <div class="num">THE UNIVERSITY OF TEXAS AT AUSTIN</div>
+        <ul>
+          <li><span class="ph" data-i="KC"><img src="assets/people/kaushik-chowdhury.jpg" alt="Kaushik Chowdhury" loading="lazy" onerror="this.remove()"></span><span><a href="https://wncg.org/profiles/kaushik-chowdhury" target="_blank" rel="noopener">Kaushik Chowdhury</a></span></li>
+          <li><span class="ph" data-i="JA"><img src="assets/people/jeffrey-g-andrews.jpg" alt="Jeffrey G. Andrews" loading="lazy" onerror="this.remove()"></span><span><a href="https://www.ece.utexas.edu/people/faculty/jeffrey-andrews" target="_blank" rel="noopener">Jeffrey G. Andrews</a></span></li>
+        </ul>
+      </div>
+      <div class="card inst">
+        <div class="num">VIRGINIA TECH</div>
+        <ul>
+          <li><span class="ph" data-i="RH"><img src="assets/people/rose-qingyang-hu.jpg" alt="Rose Qingyang Hu" loading="lazy" onerror="this.remove()"></span><span><a href="https://ece.vt.edu/people/board/rose-hu.html" target="_blank" rel="noopener">Rose Qingyang Hu</a></span></li>
+          <li><span class="ph" data-i="LL"><img src="assets/people/lingjia-liu.jpg" alt="Lingjia Liu" loading="lazy" onerror="this.remove()"></span><span><a href="https://lingjialiu.ece.vt.edu/" target="_blank" rel="noopener">Lingjia Liu</a></span></li>
+          <li><span class="ph" data-i="HD"><img src="assets/people/harpreet-s-dhillon.jpg" alt="Harpreet S. Dhillon" loading="lazy" onerror="this.remove()"></span><span><a href="https://ece.vt.edu/people/profile/dhillon.html" target="_blank" rel="noopener">Harpreet S. Dhillon</a></span></li>
+          <li><span class="ph" data-i="BJ"><img src="assets/people/bo-ji.jpg" alt="Bo Ji" loading="lazy" onerror="this.remove()"></span><span><a href="https://hci.icat.vt.edu/research-directory/people/bo-ji.html" target="_blank" rel="noopener">Bo Ji</a></span></li>
+        </ul>
+      </div>
+      <div class="card inst">
+        <div class="num">UNIVERSITY OF WISCONSIN–MADISON</div>
+        <ul>
+          <li><span class="ph" data-i="FY"><img src="assets/people/feng-ye.jpg" alt="Feng Ye" loading="lazy" onerror="this.remove()"></span><span><a href="https://engineering.wisc.edu/directory/profile/feng-ye/" target="_blank" rel="noopener">Feng Ye</a></span></li>
+          <li><span class="ph" data-i="SB"><img src="assets/people/suman-banerjee.jpg" alt="Suman Banerjee" loading="lazy" onerror="this.remove()"></span><span><a href="https://pages.cs.wisc.edu/~suman" target="_blank" rel="noopener">Suman Banerjee</a></span></li>
+          <li><span class="ph" data-i="JM"><img src="assets/people/joshua-san-miguel.jpg" alt="Joshua San Miguel" loading="lazy" onerror="this.remove()"></span><span><a href="https://www.jsm.ece.wisc.edu/" target="_blank" rel="noopener">Joshua San Miguel</a></span></li>
+        </ul>
+      </div>
+      <div class="card inst">
+        <div class="num">ERICSSON · INDUSTRY PARTNER</div>
+        <ul>
+          <li><span class="ph" data-i="MC"><img src="assets/people/md-moin-uddin-chowdhury.jpg" alt="Md Moin Uddin Chowdhury" loading="lazy" onerror="this.remove()"></span><span><a href="https://www.linkedin.com/in/moinchowdhury1/" target="_blank" rel="noopener">Md Moin Uddin Chowdhury</a></span></li>
+          <li><span class="ph" data-i="PK"><img src="assets/people/per-karlsson.jpg" alt="Per Karlsson" loading="lazy" onerror="this.remove()"></span><span><a href="https://www.linkedin.com/in/pelleka/" target="_blank" rel="noopener">Per Karlsson</a></span></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Photos: put square images at assets/people/<name>.jpg (see assets/people/README.md); initials show until a photo exists -->
+  </div>
+</section>
+
+<section id="outputs">
+  <div class="wrap">
+    <h2>Outputs</h2>
+    <p class="lead">Publications, software, and datasets will be listed here as they are released.</p>
+    <a class="codebar" href="https://github.com/SCOPE-XR">
+      <svg viewBox="0 0 16 16" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span><b>All SCOPE-XR code lives on GitHub</b>Software, O-RAN xApps/rApps, and tools from every partner site are hosted under the <u>github.com/SCOPE-XR</u> organization.</span>
+    </a>
+    <div class="grid g3">
+      <div class="card"><div class="num">PUBLICATIONS</div><h3>Coming soon</h3><p>Peer-reviewed papers from the project.</p></div>
+      <div class="card"><div class="num">SOFTWARE</div><h3>O-RAN modules</h3><p>xApps, rApps, and Radio Radiance Field models, released under <a href="https://github.com/SCOPE-XR">SCOPE-XR</a>.</p></div>
+      <div class="card"><div class="num">DATASETS</div><h3>Benchmarks</h3><p>Paired XR perception and radio-channel datasets.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <p class="ack"><strong>Acknowledgment.</strong> This material is based upon work supported by the U.S. National Science Foundation under Award No. 2554332. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
+    <p>© 2026 SCOPE-XR · <a href="https://github.com/SCOPE-XR">github.com/SCOPE-XR</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
